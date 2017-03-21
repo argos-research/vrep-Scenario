@@ -59,10 +59,10 @@ int main(int argc,char* argv[])
             if (simxReadProximitySensor(clientID,sensorHandle,&sensorTrigger,NULL,NULL,NULL,simx_opmode_streaming)==simx_return_ok)
             { // We succeeded at reading the proximity sensor
                 int simulationTime=simxGetLastCmdTime(clientID);
-                if (simulationTime-driveBackStartTime<3000)
+                if (simulationTime-driveBackStartTime<4000)
                 { // driving backwards while slightly turning:
                     motorSpeeds[0]=-pi*0.5f;
-                    motorSpeeds[1]=-pi*0.25f;
+                    motorSpeeds[1]=-pi*0.1f;
                 }
                 else
                 { // going forward:
