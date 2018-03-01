@@ -52,7 +52,8 @@ set config {
 		<resource name="RAM" quantum="5M"/>
 		<config>
 			<network dhcp="yes" />
-		</config>
+                        <vrep ip-address="192.168.137.1" port="19997" />
+                </config>
 	</start>
 }
 
