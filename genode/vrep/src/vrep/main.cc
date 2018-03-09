@@ -4,6 +4,9 @@
 #include <nic/packet_allocator.h>
 #include <base/log.h>
 #include <lwip/genode.h>
+extern "C" {
+	#include <lwip/sockets.h>
+}
 
 #define pi 3.14f
 
@@ -42,6 +45,14 @@ void Component::construct(Genode::Env &)
 			network.attribute("gateway").value(gateway, sizeof(gateway));
 		} catch(Genode::Xml_node::Nonexistent_attribute) {
 			Genode::error("please check the network configuration");
+			return;
+		}
+
+		if (lwip_nic_init(inet_addr(ip_addr),
+						  inet_addr(subnet),
+						  inet_addr(gateway),
+						  BUF_SIZE,
+						  BUF_SIZE)) {
 			return;
 		}
 	}
