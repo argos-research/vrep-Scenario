@@ -52,7 +52,7 @@ set config {
 		<resource name="RAM" quantum="5M"/>
 		<config>
 			<network dhcp="yes" />
-                        <vrep ip-address="192.168.137.1" port="19997" />
+                        <vrep ip-address="10.0.0.1" port="19997" />
                 </config>
 	</start>
 }
@@ -124,6 +124,7 @@ append qemu_args " -net nic,macaddr=02:00:00:00:01:03 "
 append_if [have_spec x86]     qemu_args " -net nic,model=e1000 "
 append_if [have_spec lan9118] qemu_args " -net nic,model=lan9118 "
 
-append qemu_args " -net vde,sock=/tmp/switch1 "
+#append qemu_args " -net vde,sock=/tmp/switch1 "
+append qemu_args " -net tap,ifname=tap0,script=no "
 
 run_genode_until forever
